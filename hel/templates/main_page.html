@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <title>Менеджер открытия франшизы</title>
+</head>
+<body>
+  <header class="container-fluid">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <a class="navbar-brand" href="/">Hel</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+          {% if authorized %}
+          <li class="nav-item {% if personal %}active{% endif %}">
+            <a class="nav-link" href="/user/{{ user.id }}">Личный кабинет</a>
+          </li>
+          <li class="nav-item {% if projects %}active{% endif %}">
+            <a class="nav-link" href="/projects"> Проекты</a>
+          </li>
+          <li>
+            <a class="btn btn-outline-primary" href="/login/exit"> Выйти</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% if not authorized %}
+        <form class="inline-form">
+          <a class="btn btn-primary" href="/login">Войти</a></li>
+          <a class="btn btn-outline-primary" href="/registration">Регистрация</a></li>
+        </form>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <nav class="container-fluid my-2">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item">Data</li>
+    </ol>
+  </nav>
+
+  <main class="container-fluid">
+    {% block main %}
+    Добро пожаловать!
+    {% endblock %}
+  </main>
+
+   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>

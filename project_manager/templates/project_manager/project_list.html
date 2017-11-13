@@ -1,0 +1,8 @@
+{% extends "main_page.html" %}
+
+{% block main %}
+  {% for project in projects %}
+  <a href="project_{{project.id}}">{{project.label}}</a>
+  {% endfor %}
+{% endblock %}
+

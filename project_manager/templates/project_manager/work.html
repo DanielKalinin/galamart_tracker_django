@@ -1,0 +1,49 @@
+{% extends "main_page.html" %}
+{% load widget_tweaks %}
+{% load switch %}
+
+{% block main %}
+<form method="post" enctype="multipart/form-data">
+  {% for field in work.resources %}
+  {% switch field.type %}
+  {% case RESOURCE_TEXT %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  <input type="text" name="{{field.tag}}" value="{{field.text}}">
+  {% case RESOURCE_SELECT %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  <select name="{{field.tag}}" multiple>
+    {% for option in field.options %}
+    <option value="{{option.value}}">{{option.label}}</option>
+    {% endfor %}
+  </select>
+  {% case RESOURCE_RATIO %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  {% for option in field.options %}
+  <input type="ratio" name="{{field.tag}}" value="{{option.value}}">
+    {{option.label}}
+  </input>
+  {% endfor %}
+  {% case RESOURCE_CHECKBOX %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  {% for option in field.options %}
+  <input type="checkbox" name="{{field.tag}}[]" value="{{option.value}}">
+    {{option.label}}
+  </input>
+  {% endfor %}
+  {% case RESOURCE_IMAGE %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  {% for img in field.files %}
+  <img src="{{img.url}}">
+  {% endfor %}
+  <input type="file" name="{{field.tag}}[]" multiple>
+  {% case RESOURCE_FILE %}
+  <label for="{{field.tag}}">{{field.label}}</label>
+  {% for file in field.files %}
+  <a href="{{file.url}}">{{file.name}}</a>
+  {% endfor %}
+  <input type="file" name="{{field.tag}}[]" multiple>
+  {% endswitch %}
+  {% endfor %}
+  <input type="submit" name="work_form" value="Подтвердить">
+</form>
+{% endblock %}

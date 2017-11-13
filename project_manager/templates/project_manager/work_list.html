@@ -1,0 +1,8 @@
+{% extends "main_page.html" %}
+
+{% block main %}
+  {% for work in works %}
+  <a href="work_{{work.id}}">{{work.label}}</a>
+  {% endfor %}
+{% endblock %}
+
